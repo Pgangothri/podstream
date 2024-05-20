@@ -39,9 +39,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "if [ \"$CI\" = \"true\" ]; then npm run build:ci; else npm run build:local; fi",
+    "build:ci": "webpack --config webpack.config.js --mode production",
+    "build:local": "webpack --config webpack.config.js --mode development",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": [
